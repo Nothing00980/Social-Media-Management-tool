@@ -1,0 +1,74 @@
+.create-post-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-post-container h2 {
+    text-align: center;
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .form-group label {
+    font-weight: 500;
+    color: #555555;
+  }
+  
+  .form-check-label {
+    margin-left: 5px;
+    font-size: 15px;
+  }
+  
+  textarea.form-control {
+    resize: none;
+  }
+  
+  button.btn-primary {
+    font-weight: bold;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  button.btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .image-upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .upload-placeholder {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+  
+  .upload-placeholder:hover {
+    opacity: 0.8;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .create-post-card {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* For the upload area hover effect */
+  label[for="fileInput"]:hover {
+    border-color: #aaa !important;
+    background-color: #f8f9fa;
+  }
+  

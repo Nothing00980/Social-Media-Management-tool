@@ -1,0 +1,19 @@
+.show{
+  display:  block !important;
+}
+/* updated css only */
+.mb-4 {
+  margin-bottom: 0.0rem !important;
+}
+.card-title {
+  color: white;
+}
+.card-body {
+  color: white
+}
+.bg-primary {
+  background-color: transparent !important;
+}
+.text-muted {
+  color: rgb(168, 168, 168) !important;
+}

@@ -1,0 +1,26 @@
+.show-now{
+    display: inline;
+}
+@media (min-width: 992px) {
+    .show-now{
+        display: none;
+    }
+}
+.navbar-brand img {
+    mix-blend-mode: screen; /* Keeps the white parts visible */
+  }
+  
+
+  /* Add to your global CSS */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+  }
+  
+  button {
+    margin-left: 15px;
+  }
+  
