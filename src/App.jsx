@@ -10,6 +10,8 @@ import Container from "react-bootstrap/Container";
 import SocialMedia from "./component/pages/SocialMedia";
 import Dashboard from "./component/dashboard/dashboard";
 import Homepage from "./component/pages/homepage";
+import PrivacyPolicy from "./component/route/PrivacyPolicy";
+import TermsOfService from "./component/route/TermsOfService";
 
 function App() {
   
@@ -26,8 +28,13 @@ function App() {
           {/* Protected Route - Only accessible when logged in */}
           <Route
             path="/dashboard"
-            element={<ProtectedRoute><Dashboard /></ProtectedRoute>}
+            element={<ProtectedRoute>
+              <Dashboard />
+              </ProtectedRoute>}
           />
+
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
         
 
