@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import {Nango} from '@nangohq/frontend';
 
 const AuthPage = () => {
   const [show, setShow] = useState(false); // Modal state
@@ -11,64 +12,64 @@ const AuthPage = () => {
   const handleClose = () => setShow(false);
 
   // Function to simulate successful authentication
-  const authenticate = async (platform) => {
-    // Show modal
-    setShow(true);
+  // const authenticate = async (platform) => {
+  //   // Show modal
+  //   setShow(true);
   
-    try {
-      // Step 1: Fetch token from backend
-      const response = await fetch("http://localhost:2000/auth/token", {
-        credentials: "include", // Ensures cookies are sent with the request
-      });
+  //   try {
+  //     // Step 1: Fetch token from backend
+  //     const response = await fetch("http://localhost:2000/auth/token", {
+  //       credentials: "include", // Ensures cookies are sent with the request
+  //     });
   
-      if (!response.ok) {
-        throw new Error("Failed to fetch auth token from backend");
-      }
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch auth token from backend");
+  //     }
   
-      const data = await response.json();
-      const token = data.token;
+  //     const data = await response.json();
+  //     const token = data.token;
   
-      if (!token) {
-        throw new Error("Token not received from backend");
-      }
+  //     if (!token) {
+  //       throw new Error("Token not received from backend");
+  //     }
   
-      // Step 2: Determine platform auth URL
-      let authUrl = "";
-      switch (platform) {
-        case "facebook":
-          authUrl = `http://localhost:2000/auth/facebook?token=${token}`;
-          break;
-        case "instagram":
-          authUrl = `http://localhost:2000/auth/instagram?token=${token}`;
-          break;
-        case "linkedin":
-          authUrl = `http://localhost:2000/auth/linkedin?token=${token}`;
-          break;
-        case "twitter":
-          authUrl = `http://localhost:2000/auth/twitter?token=${token}`;
-          break;
-        default:
-          throw new Error("Unsupported platform");
-      }
+  //     // Step 2: Determine platform auth URL
+  //     let authUrl = "";
+  //     switch (platform) {
+  //       case "facebook":
+  //         authUrl = `http://localhost:2000/auth/facebook?token=${token}`;
+  //         break;
+  //       case "instagram":
+  //         authUrl = `http://localhost:2000/auth/instagram?token=${token}`;
+  //         break;
+  //       case "linkedin":
+  //         authUrl = `http://localhost:2000/auth/linkedin?token=${token}`;
+  //         break;
+  //       case "twitter":
+  //         authUrl = `http://localhost:2000/auth/twitter?token=${token}`;
+  //         break;
+  //       default:
+  //         throw new Error("Unsupported platform");
+  //     }
   
-      // Step 3: Redirect to social media auth
-      window.location.href = authUrl;
+  //     // Step 3: Redirect to social media auth
+  //     window.location.href = authUrl;
   
-      // Step 4 (optional): Update UI state
-      setAuthStatus((prevStatus) => ({
-        ...prevStatus,
-        [platform]: true,
-      }));
+  //     // Step 4 (optional): Update UI state
+  //     setAuthStatus((prevStatus) => ({
+  //       ...prevStatus,
+  //       [platform]: true,
+  //     }));
   
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.error("Authentication error:", error.message);
-      setShow(false);
-    }
-  };
+  //     setIsAuthenticated(true);
+  //   } catch (error) {
+  //     console.error("Authentication error:", error.message);
+  //     setShow(false);
+  //   }
+  // };
   
-  
-  
+ 
+
 
   return (
     <div className="container">
