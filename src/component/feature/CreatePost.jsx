@@ -28,72 +28,110 @@ const CreatePost = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
   
+  //   if (!caption || !image) {
+  //     alert('Please provide both a caption and an image.');
+  //     return;
+  //   }
+  
+  //   // Create structured form data object for the backend
+  //   const structuredFormData = {
+  //     auth_tokens: {
+  //       // Replace with actual tokens from the user
+  //       facebook: 'dummy_facebook_token',
+  //       instagram: 'dummy_instagram_token',
+  //       linkedin: 'dummy_linkedin_token',
+  //       x: 'dummy_x_token', // Assuming this is for Twitter (X)
+  //     },
+  //     platform_settings: {
+  //       facebook: platforms.facebook,
+  //       instagram: platforms.instagram,
+  //       linkedin: platforms.linkedin,
+  //       x: platforms.x, // Ensure platforms object contains boolean values
+  //     },
+  //     post_data: {
+  //       caption: {
+  //         text: caption,
+  //       },
+  //       media: {
+  //         file: image,
+  //       },
+  //     },
+  //   };
+  
+  //   try {
+  //     const backendResponse = await createPostRequest(structuredFormData);
+  //     console.log('Post successfully created:', backendResponse);
+  //     alert('Post successfully created on selected platforms!');
+  //   } catch (error) {
+  //     console.error('Error creating post:', error.message);
+  //     alert('Failed to create post: ' + error.message);
+  //   }
+  // };
+  
+  // // Helper function to send POST request
+  // const createPostRequest = async (formData) => {
+  //   const data = new FormData();
+  //   // Add caption and media
+  //   data.append('caption', formData.post_data.caption.text);
+  //   data.append('media', formData.post_data.media.file); // For the image file
+  
+  //   // Add platform settings and auth tokens (as JSON)
+  //   data.append('platform_settings', JSON.stringify(formData.platform_settings));
+  //   data.append('auth_tokens', JSON.stringify(formData.auth_tokens));
+  
+  //   const response = await fetch('http://localhost:2000/create', {
+  //     method: 'POST',
+  //     body: data,
+  //   });
+  
+  //   if (!response.ok) {
+  //     throw new Error('Failed to create post');
+  //   }
+  
+  //   return await response.json();
+  // };
+  
+
+  // todo with aryshare api--
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
     if (!caption || !image) {
       alert('Please provide both a caption and an image.');
       return;
     }
-  
-    // Create structured form data object for the backend
-    const structuredFormData = {
-      auth_tokens: {
-        // Replace with actual tokens from the user
-        facebook: 'dummy_facebook_token',
-        instagram: 'dummy_instagram_token',
-        linkedin: 'dummy_linkedin_token',
-        x: 'dummy_x_token', // Assuming this is for Twitter (X)
-      },
-      platform_settings: {
-        facebook: platforms.facebook,
-        instagram: platforms.instagram,
-        linkedin: platforms.linkedin,
-        x: platforms.x, // Ensure platforms object contains boolean values
-      },
-      post_data: {
-        caption: {
-          text: caption,
-        },
-        media: {
-          file: image,
-        },
-      },
-    };
-  
+
+    const selectedPlatforms = Object.entries(platforms)
+      .filter(([_, value]) => value)
+      .map(([key]) => (key === 'x' ? 'twitter' : key));
+
+    const formData = new FormData();
+    formData.append('post', caption);
+    formData.append('media', image);
+    formData.append('platforms', JSON.stringify(selectedPlatforms));
+
     try {
-      const backendResponse = await createPostRequest(structuredFormData);
-      console.log('Post successfully created:', backendResponse);
-      alert('Post successfully created on selected platforms!');
+      const response = await fetch('http://localhost:2000/api/post', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) throw new Error(result.error || 'Failed to create post');
+
+      alert('✅ Post successful!');
+      console.log(result);
     } catch (error) {
-      console.error('Error creating post:', error.message);
-      alert('Failed to create post: ' + error.message);
+      console.error('❌ Error:', error.message);
+      alert('❌ ' + error.message);
     }
   };
-  
-  // Helper function to send POST request
-  const createPostRequest = async (formData) => {
-    const data = new FormData();
-    // Add caption and media
-    data.append('caption', formData.post_data.caption.text);
-    data.append('media', formData.post_data.media.file); // For the image file
-  
-    // Add platform settings and auth tokens (as JSON)
-    data.append('platform_settings', JSON.stringify(formData.platform_settings));
-    data.append('auth_tokens', JSON.stringify(formData.auth_tokens));
-  
-    const response = await fetch('http://localhost:2000/create', {
-      method: 'POST',
-      body: data,
-    });
-  
-    if (!response.ok) {
-      throw new Error('Failed to create post');
-    }
-  
-    return await response.json();
-  };
-  
+
+
 
   return (
     <Card className="mb-4 create-post-card">

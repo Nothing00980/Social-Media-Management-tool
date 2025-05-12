@@ -60,7 +60,7 @@ export default function SocialMedia() {
                   <span>
                     <IoHome />
                   </span>
-                  <span className="ms-3"> {user._id || "Location not available"}</span>
+                  <span className="ms-3"> {user.location || "Location not available"}</span>
                 </p>
                 <p>
                   <span>

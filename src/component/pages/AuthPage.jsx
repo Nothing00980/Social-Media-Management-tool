@@ -1,6 +1,7 @@
+
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import {Nango} from '@nangohq/frontend';
+import { useAuth } from "../context/AuthContext";
 
 const AuthPage = () => {
   const [show, setShow] = useState(false); // Modal state
@@ -10,6 +11,7 @@ const AuthPage = () => {
   // Handle showing the modal for social media login
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  const { user } = useAuth();
 
   // Function to simulate successful authentication
   // const authenticate = async (platform) => {
@@ -68,7 +70,7 @@ const AuthPage = () => {
   //   }
   // };
   
- 
+
 
 
   return (
