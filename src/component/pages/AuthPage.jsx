@@ -72,7 +72,14 @@ const AuthPage = () => {
       {/* Mock Login Modal */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Mock {platform.charAt(0).toUpperCase() + platform.slice(1)} Login</Modal.Title>
+          <Modal.Title>
+             <img
+              src={platformLogos[currentPlatform]}
+              alt="logo"
+              style={{ width: "30px", height: "30px", marginRight: "10px" }}
+            />
+            
+             {platform.charAt(0).toUpperCase() + platform.slice(1)} Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -102,7 +109,7 @@ const AuthPage = () => {
             Cancel
           </Button>
           <Button variant="primary" onClick={handleLogin}>
-            Mock Login
+            Login
           </Button>
         </Modal.Footer>
       </Modal>
