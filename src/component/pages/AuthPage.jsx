@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { useAuth } from "../context/AuthContext";
 
 
 
 const AuthPage = () => {
   const [show, setShow] = useState(false); // Modal state
   const [authStatus, setAuthStatus] = useState({}); // Track status of each social media auth
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track overall authentication status
 
   // Handle showing the modal for social media login
   const handleShow = () => setShow(true);
@@ -24,99 +22,6 @@ const AuthPage = () => {
   //     linkedin: linkedinAuth,
   //   });
   // }, []);
-  const { user } = useAuth();
-
-  // Function to simulate successful authentication
-  // const authenticate = async (platform) => {
-  //   // Show modal
-  //   setShow(true);
-  
-  //   try {
-  //     // Step 1: Fetch token from backend
-  //     const response = await fetch("http://localhost:2000/auth/token", {
-  //       credentials: "include", // Ensures cookies are sent with the request
-  //     });
-  
-  //     if (!response.ok) {
-  //       throw new Error("Failed to fetch auth token from backend");
-  //     }
-  
-  //     const data = await response.json();
-  //     const token = data.token;
-  
-  //     if (!token) {
-  //       throw new Error("Token not received from backend");
-  //     }
-  
-  //     // Step 2: Determine platform auth URL
-  //     let authUrl = "";
-  //     switch (platform) {
-  //       case "facebook":
-  //         authUrl = `http://localhost:2000/auth/facebook?token=${token}`;
-  //         break;
-  //       case "instagram":
-  //         authUrl = `http://localhost:2000/auth/instagram?token=${token}`;
-  //         break;
-  //       case "linkedin":
-  //         authUrl = `http://localhost:2000/auth/linkedin?token=${token}`;
-  //         break;
-  //       case "twitter":
-  //         authUrl = `http://localhost:2000/auth/twitter?token=${token}`;
-  //         break;
-  //       default:
-  //         throw new Error("Unsupported platform");
-  //     }
-  
-  //     // Step 3: Redirect to social media auth
-  //     window.location.href = authUrl;
-  
-  //     // Step 4 (optional): Update UI state
-  //     setAuthStatus((prevStatus) => ({
-  //       ...prevStatus,
-  //       [platform]: true,
-  //     }));
-  
-  //     setIsAuthenticated(true);
-  //   } catch (error) {
-  //     console.error("Authentication error:", error.message);
-  //     setShow(false);
-  //   }
-  // };
-  const authenticate = async (platform) => {
-  try {
-    setShow(true); // Show modal
-
-    const providerMap = {
-      facebook: "oauth_facebook",
-      twitter: "oauth_twitter",
-      linkedin: "oauth_linkedin",
-    };
-
-    const provider = providerMap[platform];
-
-    if (!provider) throw new Error("Unsupported platform");
-     const currentUrl = window.location.href;
-
-    const result = await signIn?.authenticateWithRedirect({
-      strategy: provider,
-       redirectUrl: currentUrl,
-    });
-
-      localStorage.setItem(`${platform}-auth`, 'true');
-
-    // (NOTE: Clerk will handle redirect for real auth)
-    setAuthStatus((prev) => ({
-      ...prev,
-      [platform]: true,
-    }));
-
-    setIsAuthenticated(true);
-    setShow(false);
-  } catch (err) {
-    console.error("OAuth error:", err);
-    setShow(false);
-  }
-};
 
 
 
