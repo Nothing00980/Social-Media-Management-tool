@@ -9,13 +9,7 @@ const AuthPage = () => {
   const [authStatus, setAuthStatus] = useState({});
   const [credentials, setCredentials] = useState({ username: "", password: "" });
 
-   const platformLogos = {
-    facebook:
-      "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
-    twitter: "https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg",
-    linkedin:
-      "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
-  };
+ s
 
   // Load auth status based on logged-in user
   useEffect(() => {
@@ -80,11 +74,7 @@ const AuthPage = () => {
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>
-             <img
-              src={platformLogos[currentPlatform]}
-              alt="logo"
-              style={{ width: "30px", height: "30px", marginRight: "10px" }}
-            />
+            
             
              {platform.charAt(0).toUpperCase() + platform.slice(1)} Login</Modal.Title>
         </Modal.Header>
