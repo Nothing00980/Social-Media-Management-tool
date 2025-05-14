@@ -18,8 +18,8 @@ function App() {
   return (
     
     <AuthProvider>
-        <Header />
         <Router>
+        <Header />
 
         <Routes>
           {/* Public Routes */}
@@ -40,8 +40,8 @@ function App() {
 
        
 
-          </Router>
         <Footer />
+          </Router>
     </AuthProvider>
   );
 }

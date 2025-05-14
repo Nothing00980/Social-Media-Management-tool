@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
-import { useSignIn } from "@clerk/clerk-react";
 
 
 const AuthPage = () => {
-  const { signIn } = useSignIn();
   const [show, setShow] = useState(false); // Modal state
   const [authStatus, setAuthStatus] = useState({}); // Track status of each social media auth
-  // const [isAuthenticated, setIsAuthenticated] = useState(false); // Track overall authentication status
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track overall authentication status
 
   // Handle showing the modal for social media login
   const handleShow = () => setShow(true);
@@ -26,7 +24,7 @@ const AuthPage = () => {
       linkedin: linkedinAuth,
     });
   }, []);
-  // const { user } = useAuth();
+  const { user } = useAuth();
 
   // Function to simulate successful authentication
   // const authenticate = async (platform) => {
