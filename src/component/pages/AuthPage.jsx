@@ -1,7 +1,6 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 
 import { useSignIn } from "@clerk/clerk-react";
 
@@ -15,7 +14,19 @@ const AuthPage = () => {
   // Handle showing the modal for social media login
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  const { user } = useAuth();
+
+   useEffect(() => {
+    const facebookAuth = localStorage.getItem("facebook-auth") === 'true';
+    const twitterAuth = localStorage.getItem("twitter-auth") === 'true';
+    const linkedinAuth = localStorage.getItem("linkedin-auth") === 'true';
+
+    setAuthStatus({
+      facebook: facebookAuth,
+      twitter: twitterAuth,
+      linkedin: linkedinAuth,
+    });
+  }, []);
+  // const { user } = useAuth();
 
   // Function to simulate successful authentication
   // const authenticate = async (platform) => {
@@ -86,11 +97,14 @@ const AuthPage = () => {
     const provider = providerMap[platform];
 
     if (!provider) throw new Error("Unsupported platform");
+     const currentUrl = window.location.href;
 
     const result = await signIn?.authenticateWithRedirect({
       strategy: provider,
-      redirectUrl: "/dashboard",
+       redirectUrl: currentUrl,
     });
+
+      localStorage.setItem(`${platform}-auth`, 'true');
 
     // (NOTE: Clerk will handle redirect for real auth)
     setAuthStatus((prev) => ({
