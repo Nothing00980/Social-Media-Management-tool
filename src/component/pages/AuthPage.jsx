@@ -9,7 +9,7 @@ const AuthPage = () => {
   const [authStatus, setAuthStatus] = useState({});
   const [credentials, setCredentials] = useState({ username: "", password: "" });
 
- s
+ 
 
   // Load auth status based on logged-in user
   useEffect(() => {
