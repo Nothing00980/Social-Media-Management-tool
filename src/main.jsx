@@ -6,12 +6,9 @@ import App from './App.jsx'
 import './index.css'
 
 
-const clerkFrontendApi = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+// const clerkFrontendApi = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-
-      <ClerkProvider publishableKey={clerkFrontendApi}>
         <App />
-    </ClerkProvider>
   </StrictMode>,
 )
