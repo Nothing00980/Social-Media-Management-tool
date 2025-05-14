@@ -10,7 +10,7 @@ const AuthPage = () => {
   const { signIn } = useSignIn();
   const [show, setShow] = useState(false); // Modal state
   const [authStatus, setAuthStatus] = useState({}); // Track status of each social media auth
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track overall authentication status
+  // const [isAuthenticated, setIsAuthenticated] = useState(false); // Track overall authentication status
 
   // Handle showing the modal for social media login
   const handleShow = () => setShow(true);
