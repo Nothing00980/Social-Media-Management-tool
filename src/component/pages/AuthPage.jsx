@@ -1,141 +1,124 @@
+// 
+
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
-
-
+import { Modal, Button, Form } from "react-bootstrap";
 
 const AuthPage = () => {
-  const [show, setShow] = useState(false); // Modal state
-  const [authStatus, setAuthStatus] = useState({}); // Track status of each social media auth
+  const [show, setShow] = useState(false);
+  const [currentPlatform, setCurrentPlatform] = useState(null);
+  const [authStatus, setAuthStatus] = useState({});
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  // Handle showing the modal for social media login
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const platformNames = {
+    facebook: "Facebook",
+    twitter: "Twitter (X)",
+    linkedin: "LinkedIn",
+  };
 
-  //  useEffect(() => {
-  //   const facebookAuth = localStorage.getItem("facebook-auth") === 'true';
-  //   const twitterAuth = localStorage.getItem("twitter-auth") === 'true';
-  //   const linkedinAuth = localStorage.getItem("linkedin-auth") === 'true';
+  const platformLogos = {
+    facebook:
+      "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+    twitter: "https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg",
+    linkedin:
+      "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
+  };
 
-  //   setAuthStatus({
-  //     facebook: facebookAuth,
-  //     twitter: twitterAuth,
-  //     linkedin: linkedinAuth,
-  //   });
-  // }, []);
+  useEffect(() => {
+    setAuthStatus({
+      facebook: localStorage.getItem("facebook-auth") === "true",
+      twitter: localStorage.getItem("twitter-auth") === "true",
+      linkedin: localStorage.getItem("linkedin-auth") === "true",
+    });
+  }, []);
 
+  const authenticate = (platform) => {
+    setCurrentPlatform(platform);
+    setUsername("");
+    setPassword("");
+    setShow(true);
+  };
 
+  const handleLogin = () => {
+    if (!username || !password) return alert("Enter credentials");
+    localStorage.setItem(`${currentPlatform}-auth`, "true");
+    setAuthStatus((prev) => ({
+      ...prev,
+      [currentPlatform]: true,
+    }));
+    setShow(false);
+  };
 
   return (
     <div className="container">
-      <h2 className="text-center my-5">Social Media Authentication</h2>
-      
+      <h2 className="text-center my-5">Social Media Authentication (Mock)</h2>
       <div className="row justify-content-center">
-        {/* Authentication Cards for Social Media */}
-        
-        {/* Facebook */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card mb-3">
-            <div className="card-body d-flex justify-content-between align-items-center">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                alt="Facebook"
-                style={{ width: "30px", height: "30px" }}
-              />
-              {!authStatus.facebook ? (
-                <button
-                  className="btn btn-danger"
-                  onClick={() => authenticate("facebook")}
-                >
-                  Connect
-                </button>
-              ) : (
-                <span className="text-success">✔</span>
-              )}
+        {["facebook", "twitter", "linkedin"].map((platform) => (
+          <div key={platform} className="col-md-6 col-lg-4">
+            <div className="card mb-3">
+              <div className="card-body d-flex justify-content-between align-items-center">
+                <img
+                  src={platformLogos[platform]}
+                  alt={platform}
+                  style={{ width: "30px", height: "30px" }}
+                />
+                {!authStatus[platform] ? (
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => authenticate(platform)}
+                  >
+                    Connect
+                  </button>
+                ) : (
+                  <span className="text-success">✔</span>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* X (Twitter) */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card mb-3">
-            <div className="card-body d-flex justify-content-between align-items-center">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg"
-                alt="X (Twitter)"
-                style={{ width: "30px", height: "30px" }}
-              />
-              {!authStatus.x ? (
-                <button
-                  className="btn btn-danger"
-                  onClick={() => authenticate("twitter")}
-                >
-                  Connect
-                </button>
-              ) : (
-                <span className="text-success">✔</span>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Instagram
-        <div className="col-md-6 col-lg-4">
-          <div className="card mb-3">
-            <div className="card-body d-flex justify-content-between align-items-center">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
-                alt="Instagram"
-                style={{ width: "30px", height: "30px" }}
-              />
-              {!authStatus.instagram ? (
-                <button
-                  className="btn btn-danger"
-                  onClick={() => authenticate("instagram")}
-                >
-                  Connect
-                </button>
-              ) : (
-                <span className="text-success">✔</span>
-              )}
-            </div>
-          </div>
-        </div> */}
-
-        {/* LinkedIn */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card mb-3">
-            <div className="card-body d-flex justify-content-between align-items-center">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg"
-                alt="LinkedIn"
-                style={{ width: "30px", height: "30px" }}
-              />
-              {!authStatus.linkedin ? (
-                <button
-                  className="btn btn-danger"
-                  onClick={() => authenticate("linkedin")}
-                >
-                  Connect
-                </button>
-              ) : (
-                <span className="text-success">✔</span>
-              )}
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Modal for Social Media Authentication */}
-      <Modal show={show} onHide={handleClose}>
+      {/* Mock OAuth Modal */}
+      <Modal show={show} onHide={() => setShow(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Social Media Authentication</Modal.Title>
+          <Modal.Title>
+            <img
+              src={platformLogos[currentPlatform]}
+              alt="logo"
+              style={{ width: "30px", height: "30px", marginRight: "10px" }}
+            />
+            Sign in to {platformNames[currentPlatform]}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Authentication in progress...</p>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Email or Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={`Enter ${platformNames[currentPlatform]} username`}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mt-3" controlId="formPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleLogin}>
+            Login
           </Button>
         </Modal.Footer>
       </Modal>
