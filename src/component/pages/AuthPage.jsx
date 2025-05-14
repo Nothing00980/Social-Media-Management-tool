@@ -61,7 +61,7 @@ const AuthPage = () => {
 
   return (
     <div className="container">
-      <h2 className="text-center my-5">Social Media Authentication (Mock)</h2>
+      <h2 className="text-center my-5">Social Media Authentication </h2>
 
       <div className="row justify-content-center">
         {renderCard("facebook", "Facebook", "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg")}
