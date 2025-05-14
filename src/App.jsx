@@ -18,7 +18,6 @@ function App() {
   return (
     
     <AuthProvider>
-      <Router>
         <Header />
         
         <Routes>
@@ -41,7 +40,6 @@ function App() {
        
 
         <Footer />
-      </Router>
     </AuthProvider>
   );
 }
