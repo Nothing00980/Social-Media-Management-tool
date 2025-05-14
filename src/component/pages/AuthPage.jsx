@@ -13,17 +13,17 @@ const AuthPage = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-   useEffect(() => {
-    const facebookAuth = localStorage.getItem("facebook-auth") === 'true';
-    const twitterAuth = localStorage.getItem("twitter-auth") === 'true';
-    const linkedinAuth = localStorage.getItem("linkedin-auth") === 'true';
+  //  useEffect(() => {
+  //   const facebookAuth = localStorage.getItem("facebook-auth") === 'true';
+  //   const twitterAuth = localStorage.getItem("twitter-auth") === 'true';
+  //   const linkedinAuth = localStorage.getItem("linkedin-auth") === 'true';
 
-    setAuthStatus({
-      facebook: facebookAuth,
-      twitter: twitterAuth,
-      linkedin: linkedinAuth,
-    });
-  }, []);
+  //   setAuthStatus({
+  //     facebook: facebookAuth,
+  //     twitter: twitterAuth,
+  //     linkedin: linkedinAuth,
+  //   });
+  // }, []);
   const { user } = useAuth();
 
   // Function to simulate successful authentication

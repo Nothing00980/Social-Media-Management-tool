@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@clerk/clerk-react": "^5.31.2",
     "@nangohq/frontend": "^0.58.6",
     "bootstrap": "^5.3.3",
     "lucide-react": "^0.477.0",
