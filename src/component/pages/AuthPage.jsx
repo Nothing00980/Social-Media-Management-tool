@@ -90,6 +90,7 @@ const AuthPage = () => {
 
     const result = await signIn?.authenticateWithRedirect({
       strategy: provider,
+      redirectUrl: "/dashboard",
       // redirectUrl: "/auth-callback",
     });
 
