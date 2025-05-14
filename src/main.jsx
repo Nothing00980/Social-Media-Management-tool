@@ -10,7 +10,7 @@ const clerkFrontendApi = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 createRoot(document.getElementById('root')).render(
   <StrictMode>
 
-      <ClerkProvider frontendApi={clerkFrontendApi}>
+      <ClerkProvider publishableKey={clerkFrontendApi}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
