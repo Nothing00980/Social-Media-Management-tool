@@ -17,6 +17,10 @@ export default function Header() {
   // Function to handle logout
   const handleLogout = async () => {
     await logout(); // Call logout from context
+  localStorage.removeItem("user");   // Remove persisted data
+  sessionStorage.removeItem("user");
+  // Optionally clear cookies if using them for OAuth
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     window.location.href = "/"; // Redirect to home page after logout
   };
 
