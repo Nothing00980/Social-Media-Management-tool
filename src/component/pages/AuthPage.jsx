@@ -81,7 +81,6 @@ const AuthPage = () => {
       facebook: "oauth_facebook",
       twitter: "oauth_twitter",
       linkedin: "oauth_linkedin",
-      instagram: "oauth_instagram",
     };
 
     const provider = providerMap[platform];
@@ -90,7 +89,7 @@ const AuthPage = () => {
 
     const result = await signIn?.authenticateWithRedirect({
       strategy: provider,
-      // redirectUrl: "/dashboard",
+      redirectUrl: "/dashboard",
     });
 
     // (NOTE: Clerk will handle redirect for real auth)
@@ -162,7 +161,7 @@ const AuthPage = () => {
           </div>
         </div>
 
-        {/* Instagram */}
+        {/* Instagram
         <div className="col-md-6 col-lg-4">
           <div className="card mb-3">
             <div className="card-body d-flex justify-content-between align-items-center">
@@ -183,7 +182,7 @@ const AuthPage = () => {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* LinkedIn */}
         <div className="col-md-6 col-lg-4">

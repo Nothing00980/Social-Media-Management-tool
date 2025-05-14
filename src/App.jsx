@@ -19,7 +19,8 @@ function App() {
     
     <AuthProvider>
         <Header />
-        
+        <Router>
+
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Homepage />} />
@@ -39,6 +40,7 @@ function App() {
 
        
 
+          </Router>
         <Footer />
     </AuthProvider>
   );
