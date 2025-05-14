@@ -9,6 +9,14 @@ const AuthPage = () => {
   const [authStatus, setAuthStatus] = useState({});
   const [credentials, setCredentials] = useState({ username: "", password: "" });
 
+   const platformLogos = {
+    facebook:
+      "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+    twitter: "https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg",
+    linkedin:
+      "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
+  };
+
   // Load auth status based on logged-in user
   useEffect(() => {
     if (user?.email) {
@@ -69,7 +77,6 @@ const AuthPage = () => {
         {renderCard("linkedin", "LinkedIn", "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg")}
       </div>
 
-      {/* Mock Login Modal */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>
