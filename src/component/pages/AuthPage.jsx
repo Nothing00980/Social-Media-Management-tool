@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 
+import { useSignIn } from "@clerk/clerk-react";
+
+
 const AuthPage = () => {
+  const { signIn } = useSignIn();
   const [show, setShow] = useState(false); // Modal state
   const [authStatus, setAuthStatus] = useState({}); // Track status of each social media auth
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Track overall authentication status
@@ -69,7 +73,39 @@ const AuthPage = () => {
   //     setShow(false);
   //   }
   // };
-  
+  const authenticate = async (platform) => {
+  try {
+    setShow(true); // Show modal
+
+    const providerMap = {
+      facebook: "oauth_facebook",
+      twitter: "oauth_twitter",
+      linkedin: "oauth_linkedin",
+      instagram: "oauth_instagram",
+    };
+
+    const provider = providerMap[platform];
+
+    if (!provider) throw new Error("Unsupported platform");
+
+    const result = await signIn?.authenticateWithRedirect({
+      strategy: provider,
+      // redirectUrl: "/auth-callback",
+    });
+
+    // (NOTE: Clerk will handle redirect for real auth)
+    setAuthStatus((prev) => ({
+      ...prev,
+      [platform]: true,
+    }));
+
+    setIsAuthenticated(true);
+    setShow(false);
+  } catch (err) {
+    console.error("OAuth error:", err);
+    setShow(false);
+  }
+};
 
 
 
